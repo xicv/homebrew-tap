@@ -1,37 +1,19 @@
 class Recognize < Formula
   desc "Real-time speech recognition with CoreML acceleration for macOS"
   homepage "https://github.com/xicv/recognize"
-  url "https://github.com/xicv/recognize/archive/refs/tags/v2.2.0.tar.gz"
-  sha256 "78dd142f3d7ff453a2b9aceb4fbf8fddaf203e766ab49b3863e83e6310aee6ec"
+  version "2.2.0"
   license "MIT"
 
-  depends_on "cmake" => :build
-  depends_on "sdl2"
+  on_arm do
+    url "https://github.com/xicv/recognize/releases/download/v2.2.0/recognize-2.2.0-arm64.tar.gz"
+    sha256 "78d3a013824a262c8a030ad633ed135e21407bba94431f3d9e3f2c174fa03524"
+  end
+
   depends_on :macos
 
   def install
-    # Initialize whisper.cpp submodule
-    system "git", "init"
-    system "git", "submodule", "update", "--init", "--recursive", "fixtures/whisper.cpp" rescue nil
-
-    cd "src/cli" do
-      mkdir "build" do
-        system "cmake", "..",
-               "-DWHISPER_COREML=ON",
-               "-DWHISPER_COREML_ALLOW_FALLBACK=ON",
-               "-DGGML_METAL=ON",
-               "-DGGML_METAL_EMBED_LIBRARY=ON",
-               "-DGGML_NATIVE=ON",
-               "-DGGML_ACCELERATE=ON",
-               "-DGGML_BLAS=ON",
-               "-DGGML_LTO=ON",
-               "-DWHISPER_SDL2=ON",
-               *std_cmake_args
-        system "make", "-j#{ENV.make_jobs}"
-      end
-
-      bin.install "build/recognize"
-    end
+    bin.install "bin/recognize"
+    lib.install Dir["lib/*.dylib"]
   end
 
   def post_install
