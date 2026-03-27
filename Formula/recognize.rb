@@ -6,10 +6,11 @@ class Recognize < Formula
 
   on_arm do
     url "https://github.com/xicv/recognize/releases/download/v2.2.0/recognize-2.2.0-arm64.tar.gz"
-    sha256 "78d3a013824a262c8a030ad633ed135e21407bba94431f3d9e3f2c174fa03524"
+    sha256 "a26ceb54a64ea4811f6a2da27feb191dd1f4f77d72d1aaabc503cf2f2c78a483"
   end
 
   depends_on :macos
+  depends_on "sdl2"
 
   def install
     bin.install "bin/recognize"
