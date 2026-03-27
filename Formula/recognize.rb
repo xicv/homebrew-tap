@@ -5,7 +5,7 @@ class Recognize < Formula
   license "MIT"
 
   on_arm do
-    url "https://github.com/xicv/recognize/releases/download/v2.2.0/recognize-2.2.0-arm64.tar.gz"
+    url "https://github.com/xicv/recognize/releases/download/v2.2.0/recognize-2.2.0-arm64-v2.tar.gz"
     sha256 "a26ceb54a64ea4811f6a2da27feb191dd1f4f77d72d1aaabc503cf2f2c78a483"
   end
 
